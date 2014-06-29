@@ -15,20 +15,20 @@ public:
     this->value += b.value%N;
     if (this->value > N)
       this->value = this->value %N;
-		return *this;
-	}
+    return *this;
+  }
 	
-	FFE<N>& FFE<N>::operator*=(const FFE<N>& b){
-		this->value *= b.value%N;
-		this->value = this->value%N;
-		return *this;
-	}
+  FFE<N>& FFE<N>::operator*=(const FFE<N>& b){
+    this->value *= b.value%N;
+    this->value = this->value%N;
+    return *this;
+  }
 };
 
 template<long N>
 FFE<N> operator+(const FFE<N>& a, const FFE<N>& b){
  	FFE<N> *temp = new FFE<N>(a);
-	 return temp += b;
+	return temp += b;
 }
 
 template<long N>
