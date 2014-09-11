@@ -10,7 +10,15 @@ public:
   FFE<N>::FFE(int value){
     FFE<N>::value = value%N;
   }
-	 
+  
+  static const FFE<N>* ONE(){
+    return new FFE<N>(1);
+  }
+  
+  static const FFE<N>* ZERO(){
+  	return new FFE<N>(0);
+  }
+  	 
   FFE<N>& FFE<N>::operator+=(const FFE<N>& b){
     this->value += b.value%N;
     if (this->value > N)
