@@ -16,4 +16,5 @@ int main(){
 	FFE<N> *a = new FFE<N>(5);
 	FFE<N> *b = new FFE<N>(4);
 	*a += *b;
+	const FFE<N> *c = FFE<N>::ONE();
 }
