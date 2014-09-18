@@ -45,3 +45,7 @@ template <>
 struct is_prime<1> {
   enum { value = 0 };
 };
+
+#endif
+
+//http://cpptruths.blogspot.ru/2011/07/want-speed-use-constexpr-meta.html
