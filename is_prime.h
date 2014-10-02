@@ -1,51 +1,32 @@
-#ifndef IS_PRIME_H
-#define IS_PRIME_H
+template<int N, int c>
+struct is_prime_recursive
+{
+  static constexpr bool value = (c*c > N) ? true : 
+           (N % c == 0) ? false : 
+              is_prime_recursive<N, c+1>::value;
+};
+ 
+template<int N>
+struct is_prime
+{
+  static constexpr bool value = (N <= 1) ? false : is_prime_recursive<N, 2>::value;
+};
 
-struct false_type {
-  typedef false_type type;
-  enum { value = 0 };
-};
- 
-struct true_type {
-  typedef true_type type;
-  enum { value = 1 };
-};
- 
-template<bool condition, class T, class U>
-struct if_ {
-  typedef U type;
-};
- 
-template <class T, class U>
-struct if_<true, T, U> {
-  typedef T type;
-};
- 
-template<size_t N, size_t c> 
-struct is_prime_impl { 
-  typedef typename if_<(c*c > N),
-                       true_type,
-                       typename if_<(N % c == 0),
-                                    false_type,
-                                    is_prime_impl<N, c+1> >::type >::type type;
-  enum { value = type::value };
-};
- 
-template<size_t N> 
-struct is_prime {
-  enum { value = is_prime_impl<N, 2>::type::value };
-};
- 
+/*
 template <>
-struct is_prime<0> {
-  enum { value = 0 };
+struct is_prime<1>
+{
+  static constexpr bool value = 0;
 };
- 
+
 template <>
-struct is_prime<1> {
-  enum { value = 0 };
+struct is_prime<0>
+{
+  static constexpr bool value = 0;
 };
+*/
 
-#endif
-
-//http://cpptruths.blogspot.ru/2011/07/want-speed-use-constexpr-meta.html
+int main()
+{
+   bool j = is_prime<11>::value; // Computed at run-time
+}
