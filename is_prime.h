@@ -30,3 +30,7 @@ int main()
 {
    bool j = is_prime<11>::value; // Computed at run-time
 }
+
+
+//http://blog.biicode.com/template-metaprogramming-cpp-ii/
+//http://cpptruths.blogspot.ru/2011/07/want-speed-use-constexpr-meta.html
