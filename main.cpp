@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ffe.h"
+#include "is_prime.h"
 using namespace std;
 
 /*
@@ -17,4 +18,5 @@ int main(){
 	FFE<N> *b = new FFE<N>(4);
 	*a += *b;
 	const FFE<N> *c = FFE<N>::ONE();
+	bool j = is_prime<11>::value;
 }
