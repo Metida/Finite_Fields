@@ -35,13 +35,13 @@ public:
 
 template<long N>
 FFE<N> operator+(const FFE<N>& a, const FFE<N>& b){
- 	FFE<N> *temp = new FFE<N>(a);
+ 	FFE<N> temp = FFE<N>(a);
 	return temp += b;
 }
 
 template<long N>
 FFE<N> operator*(const FFE<N>& a, const FFE<N>& b){
-	FFE<N> *temp = new FFE<N>(a);
+	FFE<N> temp = FFE<N>(a);
 	return temp *= b;
 }
  
