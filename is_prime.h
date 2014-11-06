@@ -1,31 +1,19 @@
-template<int N, int c>
-struct is_prime_recursive
-{
-  static constexpr bool value = (c*c > N) ? true : 
-           (N % c == 0) ? false : 
-              is_prime_recursive<N, c+1>::value;
-};
+#ifndef IS_PRIME_H
+#define IS_PRIME_H
+
+#include <iostream>
+
+constexpr bool is_prime_recursive(size_t number, size_t c){
+  return (c*c > number) ? true : 
+           (number % c == 0) ? false : 
+              is_prime_recursive(number, c+1);
+}
  
-template<int N>
-struct is_prime
-{
-  static constexpr bool value = (N <= 1) ? false : is_prime_recursive<N, 2>::value;
-};
+constexpr bool is_prime_func(size_t number){
+  return (number <= 1) ? false : is_prime_recursive(number, 2);
+}
 
-/*
-template <>
-struct is_prime<1>
-{
-  static constexpr bool value = 0;
-};
-
-template <>
-struct is_prime<0>
-{
-  static constexpr bool value = 0;
-};
-*/
-
+#endif
 
 //http://blog.biicode.com/template-metaprogramming-cpp-ii/
 //http://cpptruths.blogspot.ru/2011/07/want-speed-use-constexpr-meta.html
