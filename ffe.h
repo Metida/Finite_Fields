@@ -46,3 +46,5 @@ FFE<N> operator*(const FFE<N>& a, const FFE<N>& b){
 }
  
 #endif /* FFE_H */
+
+http://en.cppreference.com/w/cpp/types/enable_if
