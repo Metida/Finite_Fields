@@ -1,5 +1,7 @@
 #ifndef FFE_H
 #define FFE_H
+
+#include <is_prime.h>
  
 template<long N>
 class FFE{
@@ -8,6 +10,7 @@ private:
   
 public:
   FFE<N>::FFE(int value){
+    static_assert(is_prime_func(N), "Field order must be a prime number");
     FFE<N>::value = value%N;
   }
   
