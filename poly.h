@@ -22,31 +22,20 @@ struct concat<N, Poly<N, Nums1 ...>,
 	typedef Poly<N, Nums1 ..., Nums2 ...> type;
 };
 
-/*
-template<int N, int N1, int... Nums2>
-struct concat<N, Poly<N, N1>,
-				 Poly<N, Nums2 ... >> {
-	typedef Poly<N, N1, Nums2 ...> type;
-};
-*/
-
 template<int N, typename P1, typename P2>
 struct sum {
 };
 
-/*template<int N, int ... Nums>
-struct sum<N, Poly<N, int ... Nums>, > {
-};*/
-
 template<int N, int C1, int C2, int... Nums1, int... Nums2>
 struct sum<N, Poly<N, C1, Nums1 ...>,
               Poly<N, C2, Nums2 ...>> {
-    typedef typename concat<N, Poly<N, C1+C2>, 
-							typename sum<N, Poly<N, Nums1 ...>, 
-											Poly<N, Nums2 ...>>::type
-							> type;
+    typedef typename concat<N, 
+		                    Poly<N, C1+C2>, 
+                            typename sum<N, 
+							             Poly<N, Nums1 ...>, 
+                                         Poly<N, Nums2 ...>>::type
+							>::type type;
 };
-
 
 template<int N, int C1, int C2>
 struct sum<N, Poly<N, C1>, Poly<N, C2>> {
@@ -54,4 +43,3 @@ struct sum<N, Poly<N, C1>, Poly<N, C2>> {
 };
 
 #endif
-
