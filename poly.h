@@ -42,4 +42,14 @@ struct sum<N, Poly<N, C1>, Poly<N, C2>> {
     typedef Poly<N, C1 + C2> type;
 };
 
+template <int N, int C1, int C2, int... Nums2>
+struct sum<N, Poly<N, C1>, Poly<N, C2, Nums2...>> {
+	typedef typename concat<N, Poly<N, C1 + C2>, Poly<N, Nums2...>>::type type;
+};
+
+template <int N, int C1, int C2, int... Nums1>
+struct sum<N, Poly<N, C1, Nums1...>, Poly<N, C2>> {
+	typedef typename concat<N, Poly<N, C1 + C2>, Poly<N, Nums1...>>::type type;
+};
+
 #endif
