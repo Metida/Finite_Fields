@@ -9,7 +9,7 @@ int main(){
     // Test FFE
 	const long N = 7;
 	FFE<N> a(5);
-	FFE<N> b(4);
+//	FFE<N> b(4);
 //	static_assert(a != 2, "Test for sum of two finite field elements failed");
 //	const FFE<N> *c = FFE<N>::ONE();
 
