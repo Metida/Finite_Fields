@@ -73,4 +73,15 @@ struct mult<N, Poly<N, C1>, Poly<N, C2>> {
 	typedef Poly<N, C1 * C2> type;
 };
 
+template <int N, int C1, int... Nums1, int C2, int... Nums2>
+struct mult<N, Poly<N, C1, Nums1...>, Poly<N, C2, Nums2...>> {
+	typedef typename sum <N,
+						  Poly<N, C1, Nums1...>,
+						  typename concat<N,
+										  Poly<N, 0>,
+										  typename mult<N, Poly<N, C1, Nums1...>, Poly<N, Nums2...>>::type
+										  >::type
+						 >::type type;
+};
+
 #endif
