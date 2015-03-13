@@ -14,6 +14,3 @@ constexpr bool is_prime_func(size_t number){
 }
 
 #endif
-
-//http://blog.biicode.com/template-metaprogramming-cpp-ii/
-//http://cpptruths.blogspot.ru/2011/07/want-speed-use-constexpr-meta.html

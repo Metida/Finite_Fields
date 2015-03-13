@@ -14,15 +14,15 @@ private:
 public:
   FFE(int value){
     static_assert(is_prime_func(N), "Field order must be a prime number");
-    FFE<N>::value = value%N;
+    FFE<N>::value = value % N;
   }
 
-  static const FFE<N>* ONE(){
-    return new FFE<N>(1);
+  static const FFE<N> ONE(){
+    return FFE<N>(1);
   }
 
-  static const FFE<N>* ZERO(){
-  	return new FFE<N>(0);
+  static const FFE<N> ZERO(){
+  	return FFE<N>(0);
   }
 
   FFE<N>& operator+=(const FFE<N>& b){
@@ -59,5 +59,3 @@ FFE<N> operator*(const FFE<N>& a, const FFE<N>& b){
 }
 
 #endif /* FFE_H */
-
-//http://en.cppreference.com/w/cpp/types/enable_if
