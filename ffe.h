@@ -1,61 +1,63 @@
 #ifndef FFE_H
 #define FFE_H
 
-#include <iostream>
-#include "is_prime.h"
+//#include "is_prime.h"
 
-using std::ostream;
+template <int x>
+struct int_ {
+    static const int value = x;
+};
 
-template<long N>
-class FFE{
-private:
-  int value;
+template <bool x>
+struct bool_ {
+    static const bool value = x;
+};
 
+template <int N, int x>
+struct FFE {
 public:
-  FFE(int value){
-    static_assert(is_prime_func(N), "Field order must be a prime number");
-    FFE<N>::value = value % N;
-  }
+    enum { value = x % N };
+    typedef int_<value> type;
+};
 
-  static const FFE<N> ONE(){
-    return FFE<N>(1);
-  }
+template <int N, typename P1, typename P2>
+struct FFE_sum {
+};
 
-  static const FFE<N> ZERO(){
-  	return FFE<N>(0);
-  }
+template <int N, int x, int y>
+struct FFE_sum<N, FFE<N, x>, FFE<N, y>> {
+    typedef FFE<N, x + y> type;
+};
 
-  FFE<N>& operator+=(const FFE<N>& b){
-    this->value += b.value%N;
-    if (this->value > N)
-      this->value = this->value %N;
-    return *this;
-  }
+template <int N, typename P1, typename P2>
+struct FFE_diff {
+};
 
-  FFE<N>& operator*=(const FFE<N>& b){
-    this->value *= b.value%N;
-    this->value = this->value%N;
-    return *this;
-  }
+template <int N, int x, int y>
+struct FFE_diff<N, FFE<N, x>, FFE<N, y>> {
+    enum { t = (x - y < 0) ? x - y + N : x - y };
+    typedef FFE<N, t> type;
+};
 
-    template<long M>
-    friend
-    ostream & operator<<(ostream& os, const FFE<M>& ffe){
-        return os << ffe.value;
-    }
+template <int N, typename P1, typename P2>
+struct FFE_mult {
+};
+
+template <int N, int x, int y>
+struct FFE_mult<N, FFE<N, x>, FFE<N, y>> {
+    typedef FFE<N, x * y> type;
 };
 
 
-template<long N>
-FFE<N> operator+(const FFE<N>& a, const FFE<N>& b){
- 	FFE<N> temp = FFE<N>(a);
-	return temp += b;
-}
+template<int N, typename P1, typename P2>
+struct FFE_equals {
+};
 
-template<long N>
-FFE<N> operator*(const FFE<N>& a, const FFE<N>& b){
-	FFE<N> temp = FFE<N>(a);
-	return temp *= b;
-}
+template <int N, int x, int y>
+struct FFE_equals <N, FFE<N, x>, FFE<N, y>> {
+    enum { value = FFE<N, x>::type::value == FFE<N, y>::type::value };
+    typedef bool_<value> type;
+};
+
 
 #endif /* FFE_H */
